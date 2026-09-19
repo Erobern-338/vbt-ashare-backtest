@@ -5,7 +5,10 @@ argon2-cffi==25.1.0
 argon2-cffi-bindings==26.1.0
 arrow==1.4.0
 # Editable install with no version control (ashare==0.1.0)
--e e:\vbt
+# pip freeze 原本写的是本机绝对路径 -e e:\vbt，换台机器就装不上。
+# 改成相对路径（pip 会相对本文件所在目录解析），这样 `pip install -r requirements.lock.txt`
+# 在克隆下来的仓库根目录能直接跑通。
+-e .
 asttokens==3.0.2
 async-lru==2.3.0
 attrs==26.1.0
