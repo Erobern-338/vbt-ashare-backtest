@@ -18,12 +18,15 @@ def run_signals(
     init_cash: float = DEFAULT_INIT_CASH,
     fees: float = DEFAULT_FEES,
     freq: str = DEFAULT_FREQ,
-    shift: int = 0,
+    shift: int = 1,
 ):
     """按信号回测，返回 vectorbt Portfolio。
 
-    shift=1 表示信号次日执行，用于消除"用当日收盘价算信号、又用当日收盘价成交"
-    的未来函数。A 股 T+1 在"收盘价信号 + 次日执行"的组合下天然满足。
+    shift 默认 1，即信号次一根 K 线成交。这不是风格偏好，是默认值该站在安全的一侧：
+    shift=0 会让 vectorbt 拿信号当根的收盘价成交，而当日收盘价要等收盘才知道，
+    等于用未来信息下单。想要同根成交必须显式传 shift=0 并自担该偏差。
+
+    A 股 T+1 在"收盘价算信号 + 次日成交"的组合下天然满足。
 
     fees 是对称的：开源版无法只对卖出腿征收印花税，0.0008 近似覆盖双边成本，
     会略微高估买入腿的实际费用。
