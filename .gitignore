@@ -1,0 +1,10 @@
+.venv/
+# 前导斜杠不可省：写成 "data/" 会匹配任意层级的同名目录，
+# 把 src/ashare/data/（数据层源码）一并忽略掉。
+/data/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+*.egg-info/
+src/*.egg-info/
